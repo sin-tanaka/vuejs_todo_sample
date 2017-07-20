@@ -2,6 +2,10 @@
 
 > A Vue.js project
 
+## DEMO
+
+https://sin-tanaka.github.io/vuejs_todo_sample/
+
 ## Build Setup
 
 ``` bash
