@@ -10,15 +10,14 @@
     </form>
     <hr />
     <div class="task-list-operator">
-      <button class="task-list-operator__btn" v-on:click=''>Delete finished tasks</button>
+      <button class="task-list-operator__btn" @click=removeTask()>Delete finished tasks</button>
     </div>
     <div class="task-list">
       <label class="task-list__item"
              v-for="task in tasks"
              v-bind:class="{ 'task-list__item--checked': task.isChecked }">
-        <input type="checkbox" @click="task.isChecked=!task.isChecked">
-        {{ task.text }}
-        <button @click=removeTask(task)></button>
+        <input type="checkbox" v-model="task.isChecked">
+        {{ task.isChecked }}:{{ task.text }}
       </label>
     </div>
   </div>
@@ -48,15 +47,21 @@ export default {
       })
       this.newTask = ''
     },
-    removeTask: function (task) {
-      this.tasks.splice(this.tasks.indexOf(task), 1)
+    removeTask: function () {
+      for (var i = this.tasks.length - 1; i >= 0; i--) {
+        console.log(i)
+        if (this.tasks[i].isChecked) {
+          this.tasks.splice(i, 1)
+        }
+        console.log(this.tasks)
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
-.flex-vender {
+@mixin flex-vender() {
   display: flex;
   display: -webkit-flex;
   display: -moz-flex;
@@ -72,15 +77,18 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 .task-list {
-  @extend .flex-vender;
+  @include flex-vender;
   flex-direction: column;
   align-items: center;
 
   &__item {
     width: 270px;
     text-align: left;
+    $element: #{&};
     &--checked {
+      @extend #{$element};
       color: #85a6c6;
     }
   }
