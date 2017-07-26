@@ -1,0 +1,7 @@
+app:
+    build: .
+    command: npm run dev 
+    volumes:
+        - .:/home/app/srv
+    ports: 
+        - '8000:8080'
