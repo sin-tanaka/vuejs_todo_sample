@@ -1,30 +1,24 @@
 <template>
   <div id="app">
     <h1>Vue Todo App</h1>
-    <form>
-      <p>
-        task:
-        <input type="text" v-model="newTask">
-        <button @click=addTask()>ADD</button>
-      </p>
-    </form>
+    <form-task :task="newTask" @add-event="addTask"></form-task>
     <hr />
     <div class="task-list-operator">
-      <button class="task-list-operator__btn" @click=removeTask()>Delete finished tasks</button>
+      <button class="npm install -g cordova ionictask-list-operator__btn" @click=removeTask()>Delete finished tasks</button>
     </div>
-    <div class="task-list">
-      <label class="task-list__item"
-             v-for="task in tasks"
-             v-bind:class="{ 'task-list__item--checked': task.isChecked }">
-        <input type="checkbox" v-model="task.isChecked">
-        {{ task.isChecked }}:{{ task.text }}
-      </label>
-    </div>
+    <list-task :tasks="tasks"></list-task>
   </div>
 </template>
 
 <script>
+import FormTask from './components/FormTask.vue'
+import ListTask from './components/ListTask.vue'
+
 export default {
+  components: {
+    FormTask,
+    ListTask
+  },
   data: function () {
     return {
       tasks: [
@@ -36,8 +30,8 @@ export default {
     }
   },
   methods: {
-    addTask: function () {
-      var text = this.newTask && this.newTask.trim()
+    addTask: function (taskStr) {
+      let text = taskStr && taskStr.trim()
       if (!text) {
         return
       }
@@ -61,14 +55,6 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin flex-vender() {
-  display: flex;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -76,21 +62,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-.task-list {
-  @include flex-vender;
-  flex-direction: column;
-  align-items: center;
-
-  &__item {
-    width: 270px;
-    text-align: left;
-    $element: #{&};
-    &--checked {
-      @extend #{$element};
-      color: #85a6c6;
-    }
-  }
 }
 </style>
