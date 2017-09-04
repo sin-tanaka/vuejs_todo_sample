@@ -6,8 +6,8 @@
     <label class="task-list__item"
            v-for="task in tasks"
            v-bind:key="task"
-           v-bind:class="{ 'task-list__item--checked': task.isChecked }">
-      <input type="checkbox" v-model="task.isChecked">
+           v-bind:class="{ 'task-list__item--checked': task.done }">
+      <input type="checkbox" v-model="task.done">
       {{ task.text }}
     </label>
   </transition-group>
@@ -16,7 +16,7 @@
 <script>
 export default {
   props: {
-    'tasks': []
+    tasks: Array
   }
 }
 </script>
