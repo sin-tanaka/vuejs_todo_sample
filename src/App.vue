@@ -7,7 +7,7 @@
       <button @click=removeTask()>Delete finished tasks</button>
     </div>
     <list-task :tasks="remainTasks"></list-task>
-    <list-task :tasks="doneTasks" v-show="true"></list-task>
+    <list-task :tasks="doneTasks"></list-task>
   </div>
 </template>
 
@@ -29,17 +29,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addTask'
-    ]),
-    removeTask: function () {
-      for (var i = this.tasks.length - 1; i >= 0; i--) {
-        console.log(i)
-        if (this.tasks[i].isChecked) {
-          this.tasks.splice(i, 1)
-        }
-        console.log(this.tasks)
-      }
-    }
+      'addTask', 'removeTask'
+    ])
   }
 }
 </script>

@@ -2,9 +2,20 @@
 
 > A Vue.js project
 
+Using Vue.js and Vuex.
+
 ## DEMO
 
 https://sin-tanaka.github.io/vuejs_todo_sample/
+
+## Environment
+```
+OS: MacOS 10.11.6
+% node -v     
+v6.9.4
+% npm -v      
+3.10.10
+```
 
 ## Build Setup
 
